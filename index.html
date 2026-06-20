@@ -5,15 +5,16 @@
     <title>HopeDeck IA</title>
     <link rel="icon" href="https://i.ibb.co/7Jpq27Dj/Icon.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
-                
+                        
         :root { 
             --neon-blue: #00f3ff; 
             --neon-pink: #ff00ff; 
             --bg: #050505; 
         }
-                
+                        
         body { 
             margin: 0; 
             font-family: 'Rajdhani', sans-serif; 
@@ -25,7 +26,7 @@
             min-height: 100vh; 
             overflow: hidden; 
         }
-                
+                        
         .grid-bg { 
             position: fixed; 
             top: 0; 
@@ -37,7 +38,7 @@
             background-size: 50px 50px; 
             z-index: -1; 
         }
-                
+                        
         .screen { 
             display: none; 
             width: 90%; 
@@ -49,17 +50,17 @@
             box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); 
             backdrop-filter: blur(10px); 
         }
-                
+                        
         .active { 
             display: block; 
             animation: appear 0.6s ease; 
         }
-                
+                        
         @keyframes appear { 
             from { opacity:0; transform: scale(0.95); } 
             to { opacity:1; transform: scale(1); } 
         }
-                
+                        
         h2 { 
             font-family: 'Orbitron', sans-serif; 
             color: var(--neon-blue); 
@@ -68,7 +69,7 @@
             margin-bottom: 20px; 
             text-shadow: 0 0 10px var(--neon-blue); 
         }
-                
+                        
         input, select, textarea, button { 
             width: 100%; 
             padding: 12px; 
@@ -78,8 +79,9 @@
             color: #fff; 
             border-radius: 5px; 
             box-sizing: border-box; 
+            font-family: 'Rajdhani', sans-serif;
         }
-                
+                        
         button { 
             cursor: pointer; 
             background: transparent; 
@@ -89,13 +91,13 @@
             border: 1px solid var(--neon-blue); 
             transition: 0.3s; 
         }
-                
+                        
         button:hover { 
             background: var(--neon-blue); 
             color: #000; 
             box-shadow: 0 0 15px var(--neon-blue); 
         }
-                
+                        
         #media-container { 
             position: fixed; 
             bottom: 20px; 
@@ -108,13 +110,13 @@
             overflow: hidden; 
             background: #000; 
         }
-                
+                        
         #m-img, #m-vid { 
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
         }
-                
+                        
         #dialog-text { 
             min-height: 100px; 
             font-size: 1.2rem; 
@@ -125,7 +127,99 @@
             padding-left: 15px; 
         }
 
-        /* Styles para la ventana flotante de la IA */
+        /* Botón de Google */
+        .google-btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        /* Botón de descarga superior para PC */
+        .pc-download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: auto;
+            padding: 10px 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-pink);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            z-index: 9999;
+            display: none;
+        }
+        .pc-download-btn:hover {
+            background: var(--neon-pink);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        /* =======================================================
+           NUEVOS ESTILOS: TARJETA Y VISTA PARA MÓVILES
+           ======================================================= */
+        #mobile-view {
+            display: none;
+            width: 90%;
+            max-width: 400px;
+            z-index: 1000;
+        }
+        .mobile-card {
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .mobile-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-pink);
+            text-shadow: 0 0 8px var(--neon-pink);
+            margin-top: 0;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+        }
+        .mobile-reasons {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 10px;
+        }
+        .reason-item {
+            font-size: 1.05rem;
+            margin: 12px 0;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+        }
+        .reason-item span {
+            color: var(--neon-blue);
+            font-weight: bold;
+            margin-right: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .mobile-download-btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            padding: 16px;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            background: #000;
+            animation: pulse 2s infinite alternate;
+        }
+        @keyframes pulse {
+            from { box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
+            to { box-shadow: 0 0 25px rgba(0, 243, 255, 0.5); border-color: var(--neon-blue); }
+        }
+
+        /* Ventana flotante de la IA */
         .ia-float-btn {
             position: fixed;
             bottom: 20px;
@@ -147,14 +241,12 @@
             z-index: 10000;
             transition: all 0.3s ease;
         }
-
         .ia-float-btn:hover {
             border-color: var(--neon-pink);
             color: var(--neon-pink);
             box-shadow: 0 0 20px var(--neon-pink);
             transform: scale(1.1) rotate(15deg);
         }
-
         .ia-chat-window {
             position: fixed;
             bottom: 95px;
@@ -173,38 +265,65 @@
             overflow: hidden;
             animation: widgetAppear 0.4s ease forwards;
         }
-
         @keyframes widgetAppear {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .ia-chat-window.open {
-            display: block;
-        }
-
-        .ia-chat-window iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        .ia-chat-window.open { display: block; }
+        .ia-chat-window iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
     <div class="grid-bg"></div>
     
+    <button id="pcDownloadBtn" class="pc-download-btn" onclick="descargarAppPC()">(OPCIONAL) DESCARGAR APP PC</button>
+        
     <div id="media-container">
         <img id="m-img" src="1.png" style="display:block;">
         <video id="m-vid" src="gif.mp4" style="display:none;" autoplay muted loop></video>
     </div>
-        
-    <div id="login" class="screen active">
+            
+    <div id="mobile-view">
+        <div class="mobile-card">
+            <h3>Entorno Móvil Detectado</h3>
+            <p style="opacity:0.8; font-size:0.95rem;">Para gestionar tus diapositivas interactivas necesitas la interfaz nativa del sistema.</p>
+            
+            <div class="mobile-reasons">
+                <div class="reason-item"><span>⚡</span> <b>Sin lag ni cierres:</b> El navegador del móvil limita la memoria; la app corre directo usando el hardware.</div>
+                <div class="reason-item"><span>🛠️</span> <b>Modo Expositor:</b> Controla tus presentaciones 3D y ruletas desde la app sin romper el formato.</div>
+                <div class="reason-item"><span>📂</span> <b>Contenido offline:</b> Revisa tus solicitudes y estados de entrega sin gastar megas.</div>
+            </div>
+            
+            <button class="mobile-download-btn" onclick="descargarAppMovil()">DESCARGAR HOPEDECK .APK</button>
+        </div>
+    </div>
+
+    <div id="login" class="screen">
         <h2>ACCESO AL SISTEMA</h2>
         <input type="email" id="l-email" placeholder="CORREO ELECTRÓNICO">
         <input type="password" id="l-pass" placeholder="CONTRASEÑA">
         <button onclick="iniciarSesion()">ENTRAR</button>
+        
+        <div class="google-btn-container">
+            <div id="buttonDiv"></div>
+        </div>
+
         <p onclick="recuperarContrasena()" style="text-align:center; cursor:pointer; color:var(--neon-pink); opacity:0.8; margin-top:15px; font-size:0.9rem;">¿Se te olvidó la contraseña?</p>
         <p onclick="showScreen('registro')" style="text-align:center; cursor:pointer; opacity:0.6">¿Eres nuevo? Regístrate</p>
+    </div>
+
+    <div id="completar-google" class="screen">
+        <h2>COMPLETAR PERFIL</h2>
+        <p style="text-align:center; opacity:0.7; font-size:0.9rem;">Registrado vía Google. Introduce tu teléfono y año para coordinar tus diapositivas.</p>
+        <input type="tel" id="g-tel" placeholder="TELÉFONO DE CONTACTO">
+        <select id="g-anio">
+            <option>1er Año</option>
+            <option>2do Año</option>
+            <option>3er Año</option>
+            <option>4to Año</option>
+            <option>5to Año</option>
+        </select>
+        <button onclick="guardarPerfilGoogle()">ACCEDER</button>
     </div>
 
     <div id="registro" class="screen">
@@ -301,7 +420,7 @@
 
     <script>
         (function(){ emailjs.init("LdDwSQldvAHnEeMj8"); })();
-                
+                        
         const msgs = [
             "Te explicaré para qué sirve la web.",
             "Esta web te ayudará en generar: Tareas y/o Diapositivas.",
@@ -313,25 +432,114 @@
             "¡Disfruta!"
         ];
         let idx = 0, cod = "";
-        
-        // Variables de sesión temporales
+                
         let datosRegistroTemporal = {};
+        let datosGoogleTemporal = {};
         let correoRecuperacionTemporal = "";
+        let esDispositivoMovil = false;
 
-        // Animación del contenedor multimedia (imagen/video)
-        setInterval(()=>{ 
+        // DETECTOR MULTIPLATAFORMA AL CARGAR
+        window.onload = function () {
+            esDispositivoMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
             const img = document.getElementById('m-img');
             const vid = document.getElementById('m-vid');
-            if(img.style.display === 'block'){
+
+            if (esDispositivoMovil) {
                 img.style.display = 'none';
                 vid.style.display = 'block';
+                document.getElementById('mobile-view').style.display = 'block';
             } else {
-                img.style.display = 'block';
-                vid.style.display = 'none';
+                document.getElementById('pcDownloadBtn').style.display = 'block';
+                showScreen('login');
+
+                google.accounts.id.initialize({
+                    client_id: "351289213121-3fjnper62knfmsumbamvee4mhahm287i.apps.googleusercontent.com",
+                    callback: handleCredentialResponse
+                });
+                
+                google.accounts.id.renderButton(
+                    document.getElementById("buttonDiv"),
+                    { theme: "filled_black", size: "large", text: "signin_with", width: "250" }
+                );
+
+                setInterval(()=>{ 
+                    if(img.style.display === 'block'){
+                        img.style.display = 'none';
+                        vid.style.display = 'block';
+                    } else {
+                        img.style.display = 'block';
+                        vid.style.display = 'none';
+                    }
+                }, 5000);
             }
-        }, 5000);
+        }
+
+        function descargarAppMovil() {
+            // PON TU ENLACE DE DESCARGA AQUÍ (RELEASES DE GITHUB PARA MÓVIL .APK)
+            window.location.href = "AQUÍ_TU_ENLACE_DE_GITHUB_PARA_APK";
+        }
+
+        function descargarAppPC() {
+            // PON TU ENLACE DE DESCARGA AQUÍ (RELEASES DE GITHUB PARA PC .EXE O ZIP)
+            window.location.href = "AQUÍ_TU_ENLACE_DE_GITHUB_PARA_EXE";
+        }
+
+        /* =======================================================
+           INTEGRACIÓN REAL DE GOOGLE IDENTITY (OAUTH2)
+           ======================================================= */
+        function handleCredentialResponse(response) {
+            try {
+                const base64Url = response.credential.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                    return '%' + ('0' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+                const googleUser = JSON.parse(jsonPayload);
+                const emailGoogle = googleUser.email.toLowerCase();
+                
+                let usuario = localStorage.getItem(emailGoogle);
+                
+                if (!usuario) {
+                    datosGoogleTemporal = {
+                        nombre: googleUser.given_name || "Usuario",
+                        apellido: googleUser.family_name || "Google",
+                        email: emailGoogle,
+                        password: "OAuthUser_" + Math.random().toString(36).slice(-5)
+                    };
+                    showScreen('completar-google');
+                } else {
+                    sessionStorage.setItem('usuarioActivo', emailGoogle);
+                    showScreen('dashboard');
+                }
+            } catch (error) {
+                alert("Error al procesar la autenticación con Google.");
+                console.error(error);
+            }
+        }
+
+        function guardarPerfilGoogle() {
+            const tel = document.getElementById('g-tel').value.trim();
+            const anio = document.getElementById('g-anio').value;
+
+            if (!tel) {
+                alert("Por favor, introduce tu número de teléfono.");
+                return;
+            }
+
+            datosGoogleTemporal.telefono = tel;
+            datosGoogleTemporal.anio = anio;
+
+            localStorage.setItem(datosGoogleTemporal.email, JSON.stringify(datosGoogleTemporal));
+            sessionStorage.setItem('usuarioActivo', datosGoogleTemporal.email);
+            
+            showScreen('presentacion');
+            datosGoogleTemporal = {}; 
+        }
 
         function showScreen(id){ 
+            if (esDispositivoMovil) return; 
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); 
             document.getElementById(id).classList.add('active'); 
         }
@@ -439,13 +647,11 @@
         }
 
         /* ==========================================
-           LÓGICA: ¿SE TE OLVIDÓ LA CONTRASEÑA?
+           LÓGICA: RECOBRAR CONTRASEÑA
            ========================================== */
         async function recuperarContrasena() {
-            const email = prompt("Introduce tu correo electrónico registrado para enviarte el código:");
-            
-            if (!email) return; // Si cancela el prompt
-            
+            const email = prompt("Introduce tu correo electrónico registrado:");
+            if (!email) return; 
             const emailLimpio = email.trim().toLowerCase();
             const usuarioExistente = localStorage.getItem(emailLimpio);
 
@@ -454,18 +660,15 @@
                 return;
             }
 
-            // Guardamos el correo temporalmente para saber a quién cambiarle la clave luego
             correoRecuperacionTemporal = emailLimpio;
             cod = Math.floor(1000 + Math.random() * 9000);
 
             alert("Enviando código de recuperación a tu correo...");
-
             try {
-                // Usa tu mismo servicio y plantilla de EmailJS
                 await emailjs.send("service_0bhm81r", "template_siexuuh", { email: emailLimpio, codigo: cod });
                 showScreen('restablecer');
             } catch (error) {
-                alert("Error al enviar el código de recuperación.");
+                alert("Error al enviar el código.");
                 console.error(error);
             }
         }
@@ -480,23 +683,17 @@
             }
 
             if (codigoIngresado == cod && cod !== "") {
-                // Obtener datos viejos, actualizar clave y guardar
                 let usuario = JSON.parse(localStorage.getItem(correoRecuperacionTemporal));
                 usuario.password = nuevaPass;
-                
                 localStorage.setItem(correoRecuperacionTemporal, JSON.stringify(usuario));
-                
-                alert("¡Contraseña actualizada con éxito! Ya puedes iniciar sesión.");
+                alert("¡Contraseña actualizada con éxito!");
                 cod = "";
                 correoRecuperacionTemporal = "";
-                
-                // Limpiar campos de la pantalla de recuperación
                 document.getElementById('reset-codigo').value = "";
                 document.getElementById('reset-pass').value = "";
-                
                 showScreen('login');
             } else {
-                alert("El código de verificación es incorrecto.");
+                alert("Código de verificación incorrecto.");
             }
         }
 
@@ -535,7 +732,6 @@
         function toggleIA() {
             const chatWindow = document.getElementById('iaChatWindow');
             chatWindow.classList.toggle('open');
-            /*https://statuesque-unicorn-a594f0.netlify.app/*/
         }
     </script>
 </body>
