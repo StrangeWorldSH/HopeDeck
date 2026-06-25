@@ -29,7 +29,6 @@
             letter-spacing: 1px;
             padding: 20px;
             box-sizing: border-box;
-            /* Se eliminó overflow: hidden para permitir scroll si el formulario es largo en móviles */
         }
                         
         .grid-bg { 
@@ -136,6 +135,13 @@
             padding-left: 15px; 
         }
 
+        /* Botón de Google */
+        .google-btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
         /* Ventana flotante de la IA */
         .ia-float-btn {
             position: fixed;
@@ -218,8 +224,8 @@
         /* RESPONSIVIDAD PARA DISPOSITIVOS MÓVILES */
         @media (max-width: 600px) {
             body {
-                align-items: flex-start; /* Permite mejor desplazamiento */
-                padding: 80px 15px 100px 15px; /* Margen para no chocar con botones fijos */
+                align-items: flex-start; 
+                padding: 40px 15px 120px 15px; 
             }
             .screen {
                 padding: 20px;
@@ -227,16 +233,8 @@
             h2 {
                 font-size: 1.6rem;
             }
-            .pc-download-btn {
-                top: auto;
-                bottom: 20px;
-                left: 20px;
-                right: auto;
-                font-size: 0.9rem;
-                padding: 8px 12px;
-            }
             #media-container {
-                display: none; /* Ocultamos la decoración multimedia pequeña en móvil para limpiar interfaz */
+                display: none; 
             }
             .whatsapp-support-link {
                 bottom: 85px;
@@ -248,8 +246,6 @@
 </head>
 <body>
     <div class="grid-bg"></div>
-    
-    <button id="pcDownloadBtn" class="pc-download-btn" onclick="descargarAppPC()">DESCARGAR APP</button>
         
     <div id="media-container">
         <img id="m-img" src="1.png" style="display:block;">
@@ -401,10 +397,8 @@
             const img = document.getElementById('m-img');
             const vid = document.getElementById('m-vid');
 
-            // Siempre muestra el login inicialmente sin importar el dispositivo
             showScreen('login');
 
-            // Inicialización de Google Identity
             google.accounts.id.initialize({
                 client_id: "351289213121-3fjnper62knfmsumbamvee4mhahm287i.apps.googleusercontent.com",
                 callback: handleCredentialResponse
@@ -415,7 +409,6 @@
                 { theme: "filled_black", size: "large", text: "signin_with", width: "250" }
             );
 
-            // Bucle del fondo multimedia decorativo (para PC)
             setInterval(()=>{ 
                 if(img && img.style.display === 'block'){
                     img.style.display = 'none';
@@ -425,10 +418,6 @@
                     vid.style.display = 'none';
                 }
             }, 5000);
-        }
-
-        function descargarAppPC() {
-            window.location.href = "AQUÍ_TU_ENLACE_DE_GITHUB_PARA_EXE";
         }
 
         function handleCredentialResponse(response) {
@@ -484,7 +473,6 @@
         function showScreen(id){ 
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); 
             document.getElementById(id).classList.add('active'); 
-            // Hace un scroll automático hacia arriba al cambiar de pantalla (útil en móviles)
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
