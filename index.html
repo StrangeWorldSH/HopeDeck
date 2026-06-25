@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HopeDeck IA</title>
     <link rel="icon" href="https://i.ibb.co/7Jpq27Dj/Icon.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -25,8 +26,10 @@
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
-            overflow: hidden; 
-            letter-spacing: 1px; /* Añadido un pequeño espacio para mejorar legibilidad en bloques */
+            letter-spacing: 1px;
+            padding: 20px;
+            box-sizing: border-box;
+            /* Se eliminó overflow: hidden para permitir scroll si el formulario es largo en móviles */
         }
                         
         .grid-bg { 
@@ -43,7 +46,7 @@
                         
         .screen { 
             display: none; 
-            width: 90%; 
+            width: 100%; 
             max-width: 450px; 
             background: rgba(0,0,0,0.8); 
             border: 2px solid var(--neon-blue); 
@@ -51,6 +54,7 @@
             border-radius: 15px; 
             box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); 
             backdrop-filter: blur(10px); 
+            box-sizing: border-box;
         }
                         
         .active { 
@@ -107,8 +111,8 @@
             position: fixed; 
             bottom: 20px; 
             left: 20px; 
-            width: 100px; 
-            height: 100px; 
+            width: 80px; 
+            height: 80px; 
             z-index: 9999; 
             border: 2px solid var(--neon-pink); 
             border-radius: 50%; 
@@ -123,8 +127,8 @@
         }
                         
         #dialog-text { 
-            min-height: 100px; 
-            font-size: 1.4rem; 
+            min-height: 80px; 
+            font-size: 1.2rem; 
             color: var(--neon-pink); 
             text-shadow: 0 0 5px var(--neon-pink); 
             margin: 20px 0; 
@@ -139,7 +143,7 @@
             margin: 15px 0;
         }
 
-        /* Botón de descarga superior para PC */
+        /* Botón de descarga superior */
         .pc-download-btn {
             position: fixed;
             top: 20px;
@@ -154,74 +158,12 @@
             backdrop-filter: blur(5px);
             border-radius: 8px;
             z-index: 9999;
-            display: none;
+            display: block;
         }
         .pc-download-btn:hover {
             background: var(--neon-pink);
             color: #000;
             box-shadow: 0 0 15px var(--neon-pink);
-        }
-
-        /* =======================================================
-           NUEVOS ESTILOS: TARJETA Y VISTA PARA MÓVILES
-           ======================================================= */
-        #mobile-view {
-            display: none;
-            width: 90%;
-            max-width: 400px;
-            z-index: 1000;
-        }
-        .mobile-card {
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid var(--neon-pink);
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.2);
-            padding: 25px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .mobile-card h3 {
-            font-family: 'Bangers', cursive;
-            color: var(--neon-pink);
-            text-shadow: 0 0 8px var(--neon-pink);
-            margin-top: 0;
-            text-transform: uppercase;
-            font-size: 1.6rem;
-        }
-        .mobile-reasons {
-            text-align: left;
-            margin: 20px 0;
-            padding-left: 10px;
-        }
-        .reason-item {
-            font-size: 1.2rem;
-            margin: 12px 0;
-            line-height: 1.4;
-            display: flex;
-            align-items: flex-start;
-        }
-        .reason-item span {
-            color: var(--neon-blue);
-            font-weight: bold;
-            margin-right: 10px;
-            font-family: 'Bangers', cursive;
-        }
-        .mobile-download-btn {
-            font-family: 'Bangers', cursive;
-            font-size: 1.4rem;
-            padding: 16px;
-            border: 2px solid var(--neon-blue);
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
-            border-radius: 10px;
-            background: #000;
-            animation: pulse 2s infinite alternate;
-        }
-        @keyframes pulse {
-            from { box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
-            to { box-shadow: 0 0 25px rgba(0, 243, 255, 0.5); border-color: var(--neon-blue); }
         }
 
         /* Ventana flotante de la IA */
@@ -302,31 +244,46 @@
             border-color: var(--neon-blue);
             transform: translateY(-2px);
         }
+
+        /* RESPONSIVIDAD PARA DISPOSITIVOS MÓVILES */
+        @media (max-width: 600px) {
+            body {
+                align-items: flex-start; /* Permite mejor desplazamiento */
+                padding: 80px 15px 100px 15px; /* Margen para no chocar con botones fijos */
+            }
+            .screen {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+            .pc-download-btn {
+                top: auto;
+                bottom: 20px;
+                left: 20px;
+                right: auto;
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+            #media-container {
+                display: none; /* Ocultamos la decoración multimedia pequeña en móvil para limpiar interfaz */
+            }
+            .whatsapp-support-link {
+                bottom: 85px;
+                right: auto;
+                left: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="grid-bg"></div>
     
-    <button id="pcDownloadBtn" class="pc-download-btn" onclick="descargarAppPC()">(OPCIONAL) DESCARGAR APP PC</button>
+    <button id="pcDownloadBtn" class="pc-download-btn" onclick="descargarAppPC()">DESCARGAR APP</button>
         
     <div id="media-container">
         <img id="m-img" src="1.png" style="display:block;">
         <video id="m-vid" src="gif.mp4" style="display:none;" autoplay muted loop></video>
-    </div>
-            
-    <div id="mobile-view">
-        <div class="mobile-card">
-            <h3>Entorno Móvil Detectado</h3>
-            <p style="opacity:0.8; font-size:0.95rem;">Para gestionar tus diapositivas interactivas necesitas la interfaz nativa del sistema.</p>
-            
-            <div class="mobile-reasons">
-                <div class="reason-item"><span>⚡</span> <b>Sin lag ni cierres:</b> El navegador del móvil limita la memoria; la app corre directo usando el hardware.</div>
-                <div class="reason-item"><span>🛠️</span> <b>Modo Expositor:</b> Controla tus presentaciones 3D y ruletas desde la app sin romper el formato.</div>
-                <div class="reason-item"><span>📂</span> <b>Contenido offline:</b> Revisa tus solicitudes y estados de entrega sin gastar megas.</div>
-            </div>
-            
-            <button class="mobile-download-btn" onclick="descargarAppMovil()">DESCARGAR HOPEDECK .APK</button>
-        </div>
     </div>
 
     <div id="login" class="screen">
@@ -469,58 +426,41 @@
         let datosRegistroTemporal = {};
         let datosGoogleTemporal = {};
         let correoRecuperacionTemporal = "";
-        let esDispositivoMovil = false;
 
-        // DETECTOR MULTIPLATAFORMA AL CARGAR
         window.onload = function () {
-            esDispositivoMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
             const img = document.getElementById('m-img');
             const vid = document.getElementById('m-vid');
 
-            if (esDispositivoMovil) {
-                img.style.display = 'none';
-                vid.style.display = 'block';
-                document.getElementById('mobile-view').style.display = 'block';
-            } else {
-                document.getElementById('pcDownloadBtn').style.display = 'block';
-                showScreen('login');
+            // Siempre muestra el login inicialmente sin importar el dispositivo
+            showScreen('login');
 
-                google.accounts.id.initialize({
-                    client_id: "351289213121-3fjnper62knfmsumbamvee4mhahm287i.apps.googleusercontent.com",
-                    callback: handleCredentialResponse
-                });
-                
-                google.accounts.id.renderButton(
-                    document.getElementById("buttonDiv"),
-                    { theme: "filled_black", size: "large", text: "signin_with", width: "250" }
-                );
+            // Inicialización de Google Identity
+            google.accounts.id.initialize({
+                client_id: "351289213121-3fjnper62knfmsumbamvee4mhahm287i.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+            
+            google.accounts.id.renderButton(
+                document.getElementById("buttonDiv"),
+                { theme: "filled_black", size: "large", text: "signin_with", width: "250" }
+            );
 
-                setInterval(()=>{ 
-                    if(img.style.display === 'block'){
-                        img.style.display = 'none';
-                        vid.style.display = 'block';
-                    } else {
-                        img.style.display = 'block';
-                        vid.style.display = 'none';
-                    }
-                }, 5000);
-            }
-        }
-
-        function descargarAppMovil() {
-            // PON TU ENLACE DE DESCARGA AQUÍ (RELEASES DE GITHUB PARA MÓVIL .APK)
-            window.location.href = "AQUÍ_TU_ENLACE_DE_GITHUB_PARA_APK";
+            // Bucle del fondo multimedia decorativo (para PC)
+            setInterval(()=>{ 
+                if(img && img.style.display === 'block'){
+                    img.style.display = 'none';
+                    vid.style.display = 'block';
+                } else if(img) {
+                    img.style.display = 'block';
+                    vid.style.display = 'none';
+                }
+            }, 5000);
         }
 
         function descargarAppPC() {
-            // PON TU ENLACE DE DESCARGA AQUÍ (RELEASES DE GITHUB PARA PC .EXE O ZIP)
             window.location.href = "AQUÍ_TU_ENLACE_DE_GITHUB_PARA_EXE";
         }
 
-        /* =======================================================
-           INTEGRACIÓN REAL DE GOOGLE IDENTITY (OAUTH2)
-           ======================================================= */
         function handleCredentialResponse(response) {
             try {
                 const base64Url = response.credential.split('.')[1];
@@ -572,9 +512,10 @@
         }
 
         function showScreen(id){ 
-            if (esDispositivoMovil) return; 
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); 
             document.getElementById(id).classList.add('active'); 
+            // Hace un scroll automático hacia arriba al cambiar de pantalla (útil en móviles)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function siguiente(){ 
@@ -596,9 +537,6 @@
             for(let i=0; i<n; i++) c.innerHTML += `<input type="text" class="int" placeholder="Nombre integrante ${i+1}">`; 
         }
 
-        /* ==========================================
-           LÓGICA DE LOGIN / SESIÓN
-           ========================================== */
         function iniciarSesion() {
             const emailInput = document.getElementById('l-email').value.trim().toLowerCase();
             const passInput = document.getElementById('l-pass').value;
@@ -630,9 +568,6 @@
             showScreen('login');
         }
 
-        /* ==========================================
-           LÓGICA DE REGISTRO
-           ========================================== */
         async function enviarCodigo(){ 
             const nombre = document.getElementById('r-nombre').value.trim();
             const apellido = document.getElementById('r-apellido').value.trim();
@@ -679,9 +614,6 @@
             } 
         }
 
-        /* ==========================================
-           LÓGICA: RECOBRAR CONTRASEÑA
-           ========================================== */
         async function recuperarContrasena() {
             const email = prompt("Introduce tu correo electrónico registrado:");
             if (!email) return; 
@@ -730,9 +662,6 @@
             }
         }
 
-        /* ==========================================
-           ENVÍO DEL TRABAJO FINAL
-           ========================================== */
         async function enviar(){ 
             let ints = ""; 
             document.querySelectorAll('.int').forEach(i => ints += i.value + ", "); 
