@@ -7,7 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+        /* Importación de la fuente Bangers */
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
                         
         :root { 
             --neon-blue: #00f3ff; 
@@ -17,7 +18,7 @@
                         
         body { 
             margin: 0; 
-            font-family: 'Rajdhani', sans-serif; 
+            font-family: 'Bangers', cursive; 
             background: radial-gradient(circle at center, #1a001a 0%, #050505 100%); 
             color: #fff; 
             display: flex; 
@@ -25,6 +26,7 @@
             align-items: center; 
             min-height: 100vh; 
             overflow: hidden; 
+            letter-spacing: 1px; /* Añadido un pequeño espacio para mejorar legibilidad en bloques */
         }
                         
         .grid-bg { 
@@ -62,12 +64,13 @@
         }
                         
         h2 { 
-            font-family: 'Orbitron', sans-serif; 
+            font-family: 'Bangers', cursive; 
             color: var(--neon-blue); 
             text-transform: uppercase; 
             text-align: center; 
             margin-bottom: 20px; 
             text-shadow: 0 0 10px var(--neon-blue); 
+            font-size: 2rem;
         }
                         
         input, select, textarea, button { 
@@ -79,7 +82,8 @@
             color: #fff; 
             border-radius: 5px; 
             box-sizing: border-box; 
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
         }
                         
         button { 
@@ -90,6 +94,7 @@
             text-transform: uppercase; 
             border: 1px solid var(--neon-blue); 
             transition: 0.3s; 
+            font-size: 1.2rem;
         }
                         
         button:hover { 
@@ -119,7 +124,7 @@
                         
         #dialog-text { 
             min-height: 100px; 
-            font-size: 1.2rem; 
+            font-size: 1.4rem; 
             color: var(--neon-pink); 
             text-shadow: 0 0 5px var(--neon-pink); 
             margin: 20px 0; 
@@ -141,8 +146,8 @@
             right: 20px;
             width: auto;
             padding: 10px 18px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-family: 'Bangers', cursive;
+            font-size: 1.1rem;
             border: 1px solid var(--neon-pink);
             color: var(--neon-pink);
             background: rgba(0,0,0,0.6);
@@ -177,12 +182,12 @@
             margin-bottom: 20px;
         }
         .mobile-card h3 {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Bangers', cursive;
             color: var(--neon-pink);
             text-shadow: 0 0 8px var(--neon-pink);
             margin-top: 0;
             text-transform: uppercase;
-            font-size: 1.3rem;
+            font-size: 1.6rem;
         }
         .mobile-reasons {
             text-align: left;
@@ -190,7 +195,7 @@
             padding-left: 10px;
         }
         .reason-item {
-            font-size: 1.05rem;
+            font-size: 1.2rem;
             margin: 12px 0;
             line-height: 1.4;
             display: flex;
@@ -200,11 +205,11 @@
             color: var(--neon-blue);
             font-weight: bold;
             margin-right: 10px;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Bangers', cursive;
         }
         .mobile-download-btn {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
             padding: 16px;
             border: 2px solid var(--neon-blue);
             color: var(--neon-blue);
@@ -230,9 +235,9 @@
             border: 2px solid var(--neon-blue);
             border-radius: 50%;
             color: var(--neon-blue);
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Bangers', cursive;
             font-weight: bold;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -277,8 +282,8 @@
             position: fixed;
             bottom: 85px;
             right: 20px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-family: 'Bangers', cursive;
+            font-size: 1rem;
             color: var(--neon-pink);
             text-decoration: none;
             text-shadow: 0 0 5px var(--neon-pink);
